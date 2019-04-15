@@ -17,9 +17,11 @@ import java.util.Map;
 public class RemoveCourseController extends Controller {
 
     DataSet<Course> courses;
+    DataSet<Student> studentDataSet;
     public RemoveCourseController(DataContext dataContext) {
         super(dataContext);
         courses = dataContext.getCourses();
+        studentDataSet = dataContext.getStudents();
     }
 
     @Override
@@ -30,9 +32,16 @@ public class RemoveCourseController extends Controller {
         JSONObject input = readJson(body);
         String courseNo = input.getString("courseNo");
 
-        // TODO: Add codes for removing the course
+        Course course = this.courses.get(courseNo);
+        for (Student student: this.studentDataSet.getAll()
+        ) {
+            student.deleteCourse(course);
+        }
+        this.courses.remove(course);
 
-        return null;
+        Map<String, String> result = new HashMap<>();
+        result.put("success", "true");
+        return new JsonView(new JSONObject(result));
     }
 
     @Override

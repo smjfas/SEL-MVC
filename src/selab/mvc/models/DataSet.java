@@ -15,6 +15,11 @@ public class DataSet<T extends Model> {
         set.put(key, entity);
     }
 
+    public void remove(T entity){
+        String key = entity.getPrimaryKey();
+        set.remove(key);
+    }
+
     public T get(String key) {
         return set.get(key);
     }

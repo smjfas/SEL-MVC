@@ -5,10 +5,13 @@ import selab.mvc.models.DataContext;
 import selab.mvc.models.DataSet;
 import selab.mvc.models.entities.Course;
 import selab.mvc.models.entities.Student;
+import selab.mvc.views.JsonView;
 import selab.mvc.views.View;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddStudentToCourseController extends Controller {
 
@@ -31,12 +34,14 @@ public class AddStudentToCourseController extends Controller {
         String courseNo = input.getString("courseNo");
         String points = input.getString("points");
 
-        // TODO: Add required codes to associate the student with course
         Student student = this.studentDataSet.get(studentNo);
         Course course = this.courseDataSet.get(courseNo);
         Float grade = Float.parseFloat(points);
         student.addCourse(course, grade);
         course.addStudent(student, grade);
-        return null;
+
+        Map<String, String> result = new HashMap<>();
+        result.put("success", "true");
+        return new JsonView(new JSONObject(result));
     }
 }

@@ -20,6 +20,15 @@ public class Student implements Model {
         this.grades.add(grade);
     }
 
+    public void deleteCourse(Course course){
+        if (!this.courses.contains(course)){
+            return;
+        }
+        int id = this.courses.indexOf(course);
+        this.courses.remove(id);
+        this.grades.remove(id);
+    }
+
     @Override
     public String getPrimaryKey() {
         return this.studentNo;
