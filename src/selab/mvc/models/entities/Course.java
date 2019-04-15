@@ -3,6 +3,8 @@ package selab.mvc.models.entities;
 import selab.mvc.models.Model;
 import sun.misc.Regexp;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Course implements Model {
@@ -11,7 +13,17 @@ public class Course implements Model {
     private String startTime = null;
     private String endTime = null;
     private Weekday weekday;
+    private ArrayList<Student> students = new ArrayList<>();
+    private ArrayList<Float> grades = new ArrayList<>();
 
+
+    public void addStudent(Student student, Float grade){
+        if (this.students.contains(student) || grade > 20.0 || grade < 0.0){
+            return;
+        }
+        this.students.add(student);
+        this.grades.add(grade);
+    }
 
     @Override
     public String getPrimaryKey() {
@@ -67,7 +79,12 @@ public class Course implements Model {
 
     public String getStudents() {
         // TODO: Return a comma separated list of student names
-        return "-";
+        StringBuilder result = new StringBuilder();
+        for (Student student : this.students) {
+            result.append(student.getName() + ",");
+        }
+        result.setLength(result.length()-1);
+        return result.toString();
     }
 
     /**
@@ -108,5 +125,18 @@ public class Course implements Model {
             return 0;
         else
             return -1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return courseNo.equals(course.courseNo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseNo);
     }
 }
