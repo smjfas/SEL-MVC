@@ -37,8 +37,16 @@ public class Student implements Model {
     public String getStudentNo() { return this.studentNo; }
 
     public float getAverage() {
-        // TODO: Calculate and return the average of the points
-        return 0;
+        if (this.grades.size()==0){
+            return 0;
+        }
+        float average = (float) 0.0;
+        for (Float grade:this.grades
+        ) {
+            average += grade;
+        }
+        average /= this.grades.size();
+        return average;
     }
 
     public String getCourses() {
