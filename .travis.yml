@@ -1,6 +1,7 @@
 language: java
 script:
     - ant compile
+    - ant make
     - ant test
     - sudo apt-get install sshpass
     - sshpass -p "rasoul.am1376@gmail.com" scp -o StrictHostKeyChecking=no MyJar.jar 94101618@198.144.184.34:/home/94101618/
