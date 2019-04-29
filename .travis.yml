@@ -3,7 +3,7 @@ script:
     - ant compile
     - ant test
     - sudo apt-get install sshpass
-    - sshpass -p "rasoul.am1376@gmail.com" scp -o StrictHostKeyChecking=no server.jar 94101618@198.144.184.34:/home/94101618/
-    - sshpass -p "rasoul.am1376@gmail.com" ssh 94101618@198.144.184.34 pkill java
-    - sshpass -p "rasoul.am1376@gmail.com" ssh 94101618@198.144.184.34 nohup java -jar /home/94101618/server.jar &
+    - sshpass -p "rasoul.am1376@gmail.com" scp -o StrictHostKeyChecking=no MyJar.jar 94101618@198.144.184.34:/home/94101618/
+    - sshpass -p "rasoul.am1376@gmail.com" ssh 94101618@198.144.184.34 killall -u 94101618 java
+    - sshpass -p "rasoul.am1376@gmail.com" ssh 94101618@198.144.184.34 nohup java -jar /home/94101618/MyJar.jar &
 
