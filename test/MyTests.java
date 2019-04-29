@@ -8,7 +8,7 @@ public class MyTests {
     public void EZTest() {
 
         // assert statements
-        assertTrue(1 == 1);
+        assertTrue(0 == 1);
     }
 }
 
